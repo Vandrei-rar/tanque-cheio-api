@@ -18,30 +18,11 @@
 |
 */
 import Route from '@ioc:Adonis/Core/Route'
-import User from 'App/Models/User'
 
 Route.get('/', async () => {
-  return { hello: 'world' }
+  return { info: 'Please login in /login or register in /register' }
 })
 
-Route.post('/login', async ({ auth, request }) => {
-  const email = request.input('email')
-  const password = request.input('password')
-  await auth.use('api').attempt(email, password)
+Route.post('/login', 'AuthController.login')
 
-  //retorna uma mensagem para o usuário sobre o login
-  const user = await User.findBy('email', email)
-  var mensagem_ok = "Usuário autenticado, bem vindo "+user?.name
-  return {mensagem_ok}
-})
-
-Route.post('/register', async ({ request }) => {
-  const name = request.input('name')
-  const email = request.input('email')
-  const password = request.input('password')
-  const type = request.input('type')
-
-  await User.create({ name: name, email: email, password: password, type: type })
-  //retorna uma mensagem para o usuário sobre o Cadastro
-  return { message: 'Usuário criado com sucesso!' }
-})
+Route.post('/register', 'AuthController.register')
