@@ -2,10 +2,34 @@ version: '3.1'
 
 services:
 
+  tanque_cheio_api:
+    container_name: api
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+
+    ports:
+      - "127.0.0.1:3333:3333"
+    networks:
+      - tanque_cheio_network
+    command: sh ./docker-start.sh
+    depends_on:
+      - tanque_cheio_db
+
   tanque_cheio_db:
-    image: postgres
+    container_name: database
+    image: postgres:11
+    networks:
+      - tanque_cheio_network
     ports: [5432:5432]
     environment:
       POSTGRES_PASSWORD: ${PG_PASSWORD}
       POSTGRES_USER: ${PG_USER}
       POSTGRES_DB: ${PG_DB_NAME}
+
+networks:
+  tanque_cheio_network:
+    name: tanque_cheio_network
+    driver: bridge
