@@ -1,6 +1,6 @@
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Service extends BaseModel {
+export default class Fuel extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -8,8 +8,5 @@ export default class Service extends BaseModel {
   public type: string
 
   @column()
-  public name: string
-
-  @column()
-  public description: string
+  public description?: string
 }

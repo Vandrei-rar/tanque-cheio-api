@@ -8,9 +8,9 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
       table.integer('user_id').references('id').inTable('users').onUpdate('CASCADE').onDelete('CASCADE')
-      table.string('comment',150).notNullable()
+      table.string('comment',150)
       table.float('rating').notNullable()
-      table.string('status',100).defaultTo(ProviderFeedback.STATUS_ACTIVE).notNullable()
+      table.string('status',100).defaultTo(ProviderFeedback.STATUS_ACTIVE)
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

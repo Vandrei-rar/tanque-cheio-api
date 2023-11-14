@@ -12,19 +12,19 @@ export default class Provider extends BaseModel {
   public name: string
 
   @column()
-  public description: string
+  public description?: string
 
   @column()
-  public logo: string
+  public logo?: string
 
-  @column({ serializeAs: null })
-  public rating: number
+  @column()
+  public rating?: number
   
   @column()
-  public localization_coord: string
+  public localizationCoord: string
   
   @column()
-  public localization_text: string
+  public localizationText: string
   
   @column()
   public status: string

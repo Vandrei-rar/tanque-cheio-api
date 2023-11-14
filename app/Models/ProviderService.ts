@@ -9,16 +9,16 @@ export default class ProviderService extends BaseModel {
   public id: number
 
   @column()
-  public provider_id: number
+  public providerId: number
 
   @column()
-  public type: string
+  public serviceType: string
 
   @column()
   public name: string
 
   @column()
-  public description: string
+  public description?: string
 
   @column()
   public price: number
@@ -27,7 +27,7 @@ export default class ProviderService extends BaseModel {
   public status: string
 
   @column()
-  public creators_id: number
+  public creatorsId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

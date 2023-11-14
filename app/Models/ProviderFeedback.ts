@@ -12,7 +12,7 @@ export default class ProviderFeedback extends BaseModel {
   public userId: number
 
   @column()
-  public comment: string
+  public comment?: string
 
   @column()
   public rating: number
