@@ -1,10 +1,11 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasOne, column, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import Provider from './Provider'
 
 export default class ProviderFeedback extends BaseModel {
   public static STATUS_ACTIVE = 'active'
   public static STATUS_INACTIVE = 'inactive'
-  
+
   @column({ isPrimary: true })
   public id: number
 
@@ -25,4 +26,7 @@ export default class ProviderFeedback extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasOne(() => Provider)
+  public provider: HasOne<typeof Provider>
 }
