@@ -1,4 +1,5 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasOne, column, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import ProviderFuel from './ProviderFuel'
 
 export default class Fuel extends BaseModel {
   @column({ isPrimary: true })
@@ -9,4 +10,7 @@ export default class Fuel extends BaseModel {
 
   @column()
   public description?: string
+
+  @hasOne(() => ProviderFuel)
+  public providerFuels: HasOne<typeof ProviderFuel>
 }
