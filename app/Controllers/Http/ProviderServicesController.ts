@@ -13,14 +13,19 @@ export default class ProviderServicesController {
   public async store({ request }: HttpContextContract) {
     const providerId = request.input('providerId')
     const provider = await Provider.findOrFail(providerId)
+    console.log(provider.id)
 
-    const serviceType = request.input('fuelType')
+    const serviceType = request.input('serviceType')
     const service = await ServiceType.findOrFail(serviceType)
+    console.log(service.id)
 
+    const name = request.input('name')
+    const description = request.input('description')
     const price = request.input('price')
     const status = ProviderService.STATUS_ACTIVE
 
-    const providerService = ProviderService.create({providerId, serviceType,price: price, status})
+    const providerService = ProviderService.create({providerId, serviceType, name: name,
+       description: description, price: price, status})
     if((await providerService).$isPersisted){
       console.log(provider.id == providerId)
       console.log(service.id == serviceType)

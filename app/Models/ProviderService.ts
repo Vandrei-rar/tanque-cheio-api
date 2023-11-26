@@ -14,7 +14,7 @@ export default class ProviderService extends BaseModel {
   public providerId: number
 
   @column()
-  public serviceType: string
+  public serviceType: number
 
   @column()
   public name: string
