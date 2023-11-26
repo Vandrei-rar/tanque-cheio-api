@@ -28,3 +28,5 @@ Route.post('/login', 'AuthController.login')
 Route.post('/register', 'AuthController.register')
 
 Route.resource('/providers', 'ProvidersController')
+
+Route.resource('/fuels', 'FuelsController')
