@@ -1,7 +1,7 @@
 import { BaseModel, HasOne, column, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import ProviderFuel from './ProviderFuel'
 
-export default class Fuel extends BaseModel {
+export default class FuelType extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 

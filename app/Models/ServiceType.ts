@@ -1,7 +1,7 @@
 import { BaseModel, column, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import ProviderService from './ProviderService'
 
-export default class Service extends BaseModel {
+export default class ServiceType extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 

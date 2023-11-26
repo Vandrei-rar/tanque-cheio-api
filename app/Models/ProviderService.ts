@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, HasOne, column, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import Provider from './Provider'
-import Service from './ServiceType'
+import ServiceType from './ServiceType'
 
 export default class ProviderService extends BaseModel {
   public static STATUS_ACTIVE = 'active'
@@ -40,6 +40,6 @@ export default class ProviderService extends BaseModel {
   @hasOne(() => Provider)
   public provider: HasOne<typeof Provider>
 
-  @hasOne(() => Service)
-  public service: HasOne<typeof Service>
+  @hasOne(() => ServiceType)
+  public service: HasOne<typeof ServiceType>
 }
