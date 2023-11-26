@@ -29,19 +29,26 @@ export default class ProvidersController {
     }
   }
 
-  public async show({}: HttpContextContract) {
-    return 'Show'
+  public async show({ request }: HttpContextContract) {
+    const providerId = request.param('id')
+    const provider = await Provider.findOrFail(providerId)
+    return provider
   }
 
-  public async update({}: HttpContextContract) {
-    return 'Update'
+  public async update({ request }: HttpContextContract) {
+    const providerId = request.param('id')
+    const body = request.only(['name', 'description', 'logo', 'rating', 'localizationCoord', 'localizationText', 'status'])
+    const provider = await Provider.findOrFail(providerId)
+
+    await provider.merge(body).save()
+    return provider
   }
 
   public async destroy({ request }: HttpContextContract) {
-
-    const id = request.input('id')
-
-    await Provider.query().where('id', id).delete()
-    return 'Provider excluido'
+    const providerId = request.param('id')
+    const provider = await Provider.findOrFail(providerId)
+    provider.status = Provider.STATUS_INACTIVE
+    await provider.save()
+    return provider
   }
 }
