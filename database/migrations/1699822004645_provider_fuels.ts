@@ -7,8 +7,8 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
-      table.integer('provider_id').references('id').inTable('providers').onUpdate('CASCADE').onDelete('CASCADE')
-      table.string('fuel_type').references('type').inTable('fuel_types').onUpdate('CASCADE').onDelete('CASCADE')
+      table.integer('provider_id').unsigned().references('providers.id').onUpdate('CASCADE').onDelete('CASCADE')
+      table.integer('fuel_type').unsigned().references('fuel_types.id').onUpdate('CASCADE').onDelete('CASCADE')
       table.float('price').notNullable()
       table.string('status',100).defaultTo(ProviderFuel.STATUS_ACTIVE)
 

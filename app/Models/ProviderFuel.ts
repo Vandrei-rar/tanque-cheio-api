@@ -14,7 +14,7 @@ export default class ProviderFuel extends BaseModel {
   public providerId: number
 
   @column()
-  public fuelType: string
+  public fuelType: number
 
   @column()
   public price: number

@@ -32,3 +32,7 @@ Route.resource('/providers', 'ProvidersController')
 Route.resource('/fuels', 'FuelsController')
 
 Route.resource('/services', 'ServicesController')
+
+Route.resource('/provider-services', 'ProviderServicesController')
+
+Route.resource('/provider-fuels', 'ProviderFuelsController')
