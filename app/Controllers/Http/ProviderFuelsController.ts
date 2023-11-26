@@ -6,8 +6,8 @@ import ProviderFuel from 'App/Models/ProviderFuel'
 export default class ProviderFuelsController {
 
   public async index({}: HttpContextContract) {
-    const fuels = await ProviderFuel.all()
-    return fuels
+    const providerFuels = await ProviderFuel.all()
+    return providerFuels
   }
 
   public async store({ request }: HttpContextContract) {

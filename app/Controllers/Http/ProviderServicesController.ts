@@ -1,50 +1,55 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Provider from 'App/Models/Provider'
 import ProviderService from 'App/Models/ProviderService'
+import ServiceType from 'App/Models/ServiceType'
 
 export default class ProviderServicesController {
 
   public async index({}: HttpContextContract) {
-    const service = await ProviderService.all()
-    return service
+    const providerService = await ProviderService.all()
+    return providerService
   }
 
   public async store({ request }: HttpContextContract) {
     const providerId = request.input('providerId')
-    const serviceType = request.input('ServiceType')
-    const name = request.input('name')
-    const description = request.input('description')
+    const provider = await Provider.findOrFail(providerId)
+
+    const serviceType = request.input('fuelType')
+    const service = await ServiceType.findOrFail(serviceType)
+
     const price = request.input('price')
     const status = ProviderService.STATUS_ACTIVE
-    const creatorsId = request.input('CreatorsId')
 
-    const service = ProviderService.create({providerId: providerId, serviceType: serviceType, name: name,
-       description: description, price: price, status, creatorsId: creatorsId})
-    if ((await service).$isPersisted){
-      return 'Serviço Vinculado'
+    const providerService = ProviderService.create({providerId, serviceType,price: price, status})
+    if((await providerService).$isPersisted){
+      console.log(provider.id == providerId)
+      console.log(service.id == serviceType)
+      return 'Cadastro Vinculado'
     }else{
-      return 'Cadastro incorreto, tente novamente'
+      return 'Cadastro não vinculado, tente novamente'
     }
   }
 
   public async show({ request }: HttpContextContract) {
     const serviceId = request.param('id')
-    const service = await ProviderService.findOrFail(serviceId)
-    return service
+    const providerService = await ProviderService.findOrFail(serviceId)
+    return providerService
   }
 
   public async update({ request }: HttpContextContract) {
     const serviceId = request.param('id')
     const body = request.only(['type', 'description'])
-    const service = await ProviderService.findOrFail(serviceId)
+    const providerService = await ProviderService.findOrFail(serviceId)
 
-    await service.merge(body).save()
-    return service
+    await providerService.merge(body).save()
+    return providerService
   }
 
   public async destroy({ request }: HttpContextContract) {
     const serviceId = request.param('id')
-    const service = await ProviderService.findOrFail(serviceId)
-    service.status = ProviderService.STATUS_INACTIVE
+    const providerService = await ProviderService.findOrFail(serviceId)
+    providerService.status = ProviderService.STATUS_INACTIVE
+    providerService.save()
     return 'Serviço excluido'
   }
 }
