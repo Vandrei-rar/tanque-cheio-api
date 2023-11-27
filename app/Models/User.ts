@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import ProviderFeedback from './ProviderFeedback'
 
 export default class User extends BaseModel {
   public static STATUS_ACTIVE = 'active'
@@ -42,4 +43,8 @@ export default class User extends BaseModel {
       user.password = await Hash.make(user.password)
     }
   }
+
+  @hasMany(() => ProviderFeedback)
+  public providerFeedbacks: HasMany<typeof ProviderFeedback>
 }
+

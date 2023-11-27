@@ -7,7 +7,7 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
-      table.integer('user_id').references('id').inTable('users').onUpdate('CASCADE').onDelete('CASCADE')
+      table.integer('user_id').unsigned().references('users.id').onUpdate('CASCADE').onDelete('CASCADE')
       table.string('comment',150)
       table.float('rating').notNullable()
       table.string('status',100).defaultTo(ProviderFeedback.STATUS_ACTIVE)
